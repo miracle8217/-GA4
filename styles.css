@@ -3,32 +3,94 @@ body {
   margin: 0;
   background: #f8fafc;
   color: #1f2937;
+  line-height: 1.6;
 }
 
 .header {
-  background: #111827;
+  background: #0f172a;
   color: white;
-  padding: 16px 20px;
+  padding: 14px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-.header a {
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
   color: white;
   text-decoration: none;
-  margin-right: 16px;
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.nav a:hover {
+  background: rgba(255,255,255,0.12);
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 28px 20px 60px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  color: white;
+  padding: 40px 28px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.18);
+}
+
+.hero h1 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 34px;
+}
+
+.hero p {
+  margin: 0;
+  max-width: 760px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .card {
   background: white;
   border-radius: 16px;
   padding: 20px;
-  margin-bottom: 20px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+  margin-top: 0;
 }
 
 .btn {
@@ -41,6 +103,13 @@ body {
   font-size: 15px;
   color: white;
   background: #2563eb;
+  text-decoration: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
 .btn.green {
@@ -51,14 +120,26 @@ body {
   background: #f59e0b;
 }
 
-input, textarea {
+.btn.dark {
+  background: #334155;
+}
+
+input, textarea, select {
   width: 100%;
-  max-width: 420px;
-  padding: 10px 12px;
+  max-width: 520px;
+  padding: 11px 12px;
   border: 1px solid #cbd5e1;
   border-radius: 10px;
   margin: 8px 0 12px;
   box-sizing: border-box;
+  font: inherit;
+  background: white;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 10px;
 }
 
 a {
@@ -77,7 +158,19 @@ code {
 }
 
 .footer {
-  margin-top: 24px;
+  margin-top: 28px;
   font-size: 14px;
   color: #64748b;
+  text-align: center;
 }
+
+.badge {
+  display: inline-block;
+  background: #e2e8f0;
+  color: #0f172a;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  margin-right: 8px;
+}
+
