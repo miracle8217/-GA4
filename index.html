@@ -5,70 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>首頁｜GA4 測試站</title>
 
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKWRS35Y7', { debug_mode: true });
+  </script>
 
-  gtag('config', 'G-BHKWRS35Y7');
-</script>
-
- <link rel="stylesheet" href="styles.css" />
-
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="header">
-    <a href="index.html">首頁</a>
-    <a href="about.html">關於</a>
-    <a href="contact.html">聯絡</a>
-  </div>
-
-  <div class="container">
-    <div class="card">
-      <h1>GA4 多頁測試站 - 首頁</h1>
-      <p>這是首頁，用來測試 page_view、按鈕點擊和頁面切換。</p>
-      <p class="small">當前頁面：<code>index.html</code></p>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 測試站</a>
+      <nav class="nav">
+        <a href="index.html" onclick="trackNav('index')">首頁</a>
+        <a href="about.html" onclick="trackNav('about')">關於</a>
+        <a href="contact.html" onclick="trackNav('contact')">聯絡</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="card">
-      <h2>按鈕事件</h2>
-      <button class="btn" onclick="trackEvent('home_button_click', {button_name: 'home_blue'})">
-  首頁藍色按鈕
-</button>
+  <main class="container">
+    <section class="hero">
+      <span class="badge">GitHub Pages</span>
+      <span class="badge">GA4 Tracking</span>
+      <h1>GA4 多頁測試站</h1>
+      <p>這個網站用來測試頁面瀏覽、按鈕點擊、表單送出、捲動深度與外部連結事件，適合作業展示與實驗紀錄。</p>
+    </section>
 
-<button class="btn green" onclick="trackEvent('home_button_click', {button_name: 'home_green'})">
-  首頁綠色按鈕
-</button>
+    <section class="grid">
+      <div class="card">
+        <h2>按鈕事件</h2>
+        <p>點擊按鈕可送出自訂事件 <code>home_button_click</code>。</p>
+        <button class="btn" onclick="trackEvent('home_button_click', {button_name: 'home_blue'})">首頁藍色按鈕</button>
+        <button class="btn green" onclick="trackEvent('home_button_click', {button_name: 'home_green'})">首頁綠色按鈕</button>
+      </div>
 
-    </div>
+      <div class="card">
+        <h2>外部連結測試</h2>
+        <p>點擊以下連結會送出 <code>outbound_click</code>。</p>
+        <a href="https://www.google.com" target="_blank" rel="noopener"
+           onclick="trackOutbound('https://www.google.com', 'Google')">前往 Google</a><br />
+        <a href="https://www.youtube.com" target="_blank" rel="noopener"
+           onclick="trackOutbound('https://www.youtube.com', 'YouTube')">前往 YouTube</a>
+      </div>
 
-    <div class="card">
-      <h2>導覽到其他頁面</h2>
-      <p>請點上方導覽列，觀察頁面切換事件是否有送出。</p>
-    </div>
+      <div class="card">
+        <h2>頁面導覽</h2>
+        <p>使用上方導覽列切換頁面，測試多頁 page_view 與 nav_click。</p>
+        <a class="btn dark" href="about.html" onclick="trackNav('about')">前往關於頁</a>
+        <a class="btn dark" href="contact.html" onclick="trackNav('contact')">前往聯絡頁</a>
+      </div>
+
+      <div class="card">
+        <h2>測試提示</h2>
+        <p class="small">請到 GA4 的 Realtime 或 DebugView 觀察事件。</p>
+      </div>
+    </section>
 
     <div class="footer">
-      首頁測試完成後，請到 GA4 Realtime 或 DebugView 檢查事件。
+      <p>© 2026 GA4 測試站</p>
     </div>
-  </div>
+  </main>
 
-<script>
-  function trackEvent(eventName, params, buttonText) {
-    if (typeof gtag === 'function') {
-      gtag('event', eventName, params);
-      console.log('已送出事件：', eventName, params);
-      alert('已送出事件：' + eventName);
-    } else {
-      console.error('gtag 尚未載入');
-      alert('gtag 尚未載入');
+  <script>
+    function trackEvent(eventName, params) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, params);
+        console.log('已送出事件：', eventName, params);
+      }
     }
-  }
-</script>
 
+    function trackNav(linkName) {
+      trackEvent('nav_click', { link_name: linkName });
+    }
 
+    function trackOutbound(url, text) {
+      trackEvent('outbound_click', { link_url: url, link_text: text });
+    }
 
+    let scroll25 = false;
+    let scroll50 = false;
+    let scroll75 = false;
+    let scroll90 = false;
+
+    window.addEventListener('scroll', () => {
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop;
+      const scrollHeight = doc.scrollHeight - window.innerHeight;
+      if (scrollHeight <= 0) return;
+
+      const percent = Math.round((scrollTop / scrollHeight) * 100);
+
+      if (percent >= 25 && !scroll25) { scroll25 = true; trackEvent('scroll_depth', { percent_scrolled: 25 }); }
+      if (percent >= 50 && !scroll50) { scroll50 = true; trackEvent('scroll_depth', { percent_scrolled: 50 }); }
+      if (percent >= 75 && !scroll75) { scroll75 = true; trackEvent('scroll_depth', { percent_scrolled: 75 }); }
+      if (percent >= 90 && !scroll90) { scroll90 = true; trackEvent('scroll_depth', { percent_scrolled: 90 }); }
+    });
+  </script>
 </body>
 </html>
 
