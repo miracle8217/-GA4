@@ -124,6 +124,11 @@ body {
   background: #334155;
 }
 
+.section-title {
+  margin: 32px 0 16px;
+  font-size: 22px;
+}
+
 input, textarea, select {
   width: 100%;
   max-width: 520px;
@@ -166,12 +171,29 @@ code {
 
 .badge {
   display: inline-block;
-  background: #e2e8f0;
-  color: #0f172a;
+  background: rgba(255,255,255,0.18);
+  color: white;
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 13px;
   margin-right: 8px;
 }
+
+.stat-box {
+  text-align: center;
+  padding: 18px;
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 30px;
+  color: #2563eb;
+}
+
+.list-clean {
+  margin: 0;
+  padding-left: 20px;
+}
+
 
 
