@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GA4 GitHub Pages 測試頁</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX', {
+      debug_mode: true
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, "Noto Sans TC", sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: #1f2937;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .hero {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 36px;
+    }
+
+    p {
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin: 8px 8px 8px 0;
+      cursor: pointer;
+      font-size: 15px;
+      color: white;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .blue { background: #2563eb; }
+    .green { background: #10b981; }
+    .amber { background: #f59e0b; }
+
+    input {
+      width: 100%;
+      max-width: 320px;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      margin: 8px 0 12px;
+      box-sizing: border-box;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 14px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>GA4 GitHub Pages 測試頁</h1>
+      <p>
+        這個頁面適合直接部署到 <strong>GitHub Pages</strong>，
+        用來測試 GA4 的頁面瀏覽與自訂事件追蹤。
+      </p>
+      <p class="footer">
+        測試目標：<code>page_view</code>、按鈕點擊、表單送出、連結點擊、自訂事件
+      </p>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <h2>按鈕事件</h2>
+        <p>點擊以下按鈕，會送出 GA4 自訂事件。</p>
+        <button class="btn blue" onclick="trackButtonClick('blue_button')">藍色按鈕</button>
+        <button class="btn green" onclick="trackButtonClick('green_button')">綠色按鈕</button>
+        <button class="btn amber" onclick="trackButtonClick('amber_button')">琥珀按鈕</button>
+      </div>
+
+      <div class="card">
+        <h2>表單事件</h2>
+        <p>輸入文字後送出，會記錄表單事件。</p>
+        <input id="nameInput" type="text" placeholder="輸入你的名字" />
+        <br />
+        <button class="btn blue" onclick="trackFormSubmit()">送出表單</button>
+      </div>
+
+      <div class="card">
+        <h2>連結事件</h2>
+        <p>
+          點擊連結會送出 <code>link_click</code> 事件：
+        </p>
+        <p>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer" onclick="trackLinkClick()">
+            前往 example.com
+          </a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>自訂測試事件</h2>
+        <p>直接送出一個測試事件，方便確認 GA4 是否正常接收。</p>
+        <button class="btn green" onclick="sendCustomEvent()">送出 test_event</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 18px;">
+      <h2>部署後檢查清單</h2>
+      <ol>
+        <li>確認 GA4 Measurement ID 已正確替換</li>
+        <li>打開 GitHub Pages 網址</li>
+        <li>點擊按鈕 / 連結 / 表單</li>
+        <li>到 GA4 的 <strong>即時報表</strong> 或 <strong>DebugView</strong> 查看事件</li>
+      </ol>
+    </div>
+
+    <div class="footer">
+      建議搭配 Chrome 的 GA Debugger 擴充功能或 GA4 DebugView 一起測試。
+    </div>
+  </div>
+
+  <script>
+    function trackButtonClick(buttonName) {
+      gtag('event', 'button_click', {
+        button_name: buttonName,
+        page_location: window.location.href
+      });
+      console.log('button_click sent:', buttonName);
+    }
+
+    function trackFormSubmit() {
+      const name = document.getElementById('nameInput').value || 'anonymous';
+
+      gtag('event', 'form_submit', {
+        form_name: 'github_pages_test_form',
+        user_name: name
+      });
+
+      console.log('form_submit sent:', name);
+      alert('表單事件已送出：' + name);
+    }
+
+    function trackLinkClick() {
+      gtag('event', 'link_click', {
+        link_url: 'https://example.com',
+        link_name: 'example_link'
+      });
+
+      console.log('link_click sent');
+    }
+
+    function sendCustomEvent() {
+      gtag('event', 'test_event', {
+        event_category: 'test',
+        event_label: 'github_pages',
+        value: 1
+      });
+
+      console.log('test_event sent');
+      alert('自訂測試事件已送出');
+    }
+  </script>
+</body>
+</html>
+
+
