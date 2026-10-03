@@ -1,24 +1,30 @@
-# GA4 GitHub Pages 測試頁
+# GA4 多頁 GitHub Pages 測試站
 
-這是一個可直接部署到 GitHub Pages 的 GA4 測試頁面。
+這是一個可部署到 GitHub Pages 的多頁 GA4 測試站。
 
-## 功能
-- GA4 page_view
-- 按鈕點擊事件
-- 表單送出事件
-- 連結點擊事件
-- 自訂測試事件
+## 檔案結構
+- `index.html`
+- `about.html`
+- `contact.html`
+- `assets/styles.css`
 
-## 使用方式
-1. 打開 `index.html`
-2. 將 `G-XXXXXXXXXX` 替換成你的 GA4 Measurement ID
-3. 上傳到 GitHub repo
-4. 到 GitHub 的 `Settings > Pages` 啟用 GitHub Pages
-5. 打開產生的網址測試 GA4
+## 測試事件
+- `page_view`
+- `home_button_click`
+- `about_click`
+- `contact_form_submit`
 
-## 建議
-- 搭配 GA4 DebugView 測試
-- 可使用 Chrome 的 GA Debugger 擴充功能
+## 部署方式
+1. 將專案上傳到 GitHub repository
+2. 到 `Settings > Pages`
+3. 設定 `Deploy from a branch`
+4. Branch 選 `main`
+5. Folder 選 `/root`
+6. 儲存後等待部署完成
+
+## 注意
+請將所有檔案中的 `G-XXXXXXXXXX` 替換成你的 GA4 Measurement ID。
+
 
 
 
