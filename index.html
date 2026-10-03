@@ -34,8 +34,14 @@
 
     <div class="card">
       <h2>按鈕事件</h2>
-      <button class="btn" onclick="trackEvent('home_button_click', {button_name: 'home_blue'})">首頁藍色按鈕</button>
-      <button class="btn green" onclick="trackEvent('home_button_click', {button_name: 'home_green'})">首頁綠色按鈕</button>
+      <button class="btn" onclick="trackEvent('home_button_click', {button_name: 'home_blue'})">
+  首頁藍色按鈕
+</button>
+
+<button class="btn green" onclick="trackEvent('home_button_click', {button_name: 'home_green'})">
+  首頁綠色按鈕
+</button>
+
     </div>
 
     <div class="card">
@@ -48,12 +54,19 @@
     </div>
   </div>
 
-  <script>
-    function trackEvent(eventName, params) {
+<script>
+  function trackEvent(eventName, params) {
+    if (typeof gtag === 'function') {
       gtag('event', eventName, params);
-      console.log(eventName, params);
+      console.log('已送出事件：', eventName, params);
+      alert('已送出事件：' + eventName);
+    } else {
+      console.error('gtag 尚未載入');
+      alert('gtag 尚未載入');
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
 
