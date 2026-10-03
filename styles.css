@@ -1,0 +1,83 @@
+body {
+  font-family: Arial, "Noto Sans TC", sans-serif;
+  margin: 0;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+.header {
+  background: #111827;
+  color: white;
+  padding: 16px 20px;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin: 8px 8px 8px 0;
+  cursor: pointer;
+  font-size: 15px;
+  color: white;
+  background: #2563eb;
+}
+
+.btn.green {
+  background: #10b981;
+}
+
+.btn.amber {
+  background: #f59e0b;
+}
+
+input, textarea {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  margin: 8px 0 12px;
+  box-sizing: border-box;
+}
+
+a {
+  color: #2563eb;
+}
+
+code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.small {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #64748b;
+}
