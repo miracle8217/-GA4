@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>關於｜GA4 測試站</title>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      debug_mode: true
+    });
+  </script>
+
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="header">
+    <a href="index.html">首頁</a>
+    <a href="about.html">關於</a>
+    <a href="contact.html">聯絡</a>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h1>關於頁</h1>
+      <p>這頁可以測試不同頁面是否有正確送出 <code>page_view</code>。</p>
+      <p class="small">當前頁面：<code>about.html</code></p>
+    </div>
+
+    <div class="card">
+      <h2>自訂事件</h2>
+      <button class="btn amber" onclick="trackEvent('about_click', {section: 'about_page'})">送出 about_click</button>
+    </div>
+
+    <div class="footer">
+      請確認 Realtime / DebugView 內有看到此頁的瀏覽紀錄。
+    </div>
+  </div>
+
+  <script>
+    function trackEvent(eventName, params) {
+      gtag('event', eventName, params);
+      console.log(eventName, params);
+    }
+  </script>
+</body>
+</html>
+
+
+
