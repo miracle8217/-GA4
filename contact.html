@@ -5,64 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>聯絡｜GA4 測試站</title>
 
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-BHKWRS35Y7');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKWRS35Y7', { debug_mode: true });
+  </script>
 
   <link rel="stylesheet" href="styles.css" />
-
 </head>
 <body>
-  <div class="header">
-    <a href="index.html">首頁</a>
-    <a href="about.html">關於</a>
-    <a href="contact.html">聯絡</a>
-  </div>
-
-  <div class="container">
-    <div class="card">
-      <h1>聯絡頁</h1>
-      <p>這頁用來測試表單送出事件。</p>
-      <p class="small">當前頁面：<code>contact.html</code></p>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 測試站</a>
+      <nav class="nav">
+        <a href="index.html" onclick="trackNav('index')">首頁</a>
+        <a href="about.html" onclick="trackNav('about')">關於</a>
+        <a href="contact.html" onclick="trackNav('contact')">聯絡</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="card">
-      <h2>聯絡表單</h2>
-      <label>姓名</label>
-      <input id="name" type="text" placeholder="請輸入姓名" />
+  <main class="container">
+    <section class="hero">
+      <span class="badge">Contact Page</span>
+      <h1>聯絡我們</h1>
+      <p>這個頁面用來測試表單送出、自訂事件與欄位資料參數。</p>
+    </section>
 
-      <label>訊息</label>
-      <textarea id="message" rows="5" placeholder="請輸入訊息"></textarea>
+    <section class="grid">
+      <div class="card">
+        <h2>聯絡表單</h2>
 
-      <button class="btn" onclick="submitForm()">送出表單</button>
-    </div>
+        <label for="name">姓名</label>
+        <input id="name" type="text" placeholder="請輸入姓名" />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="name@example.com" />
+
+        <label for="topic">主題</label>
+        <select id="topic">
+          <option value="詢問">詢問</option>
+          <option value="合作">合作</option>
+          <option value="回饋">回饋</option>
+        </select>
+
+        <label for="message">訊息</label>
+        <textarea id="message" rows="5" placeholder="請輸入訊息"></textarea>
+
+        <button class="btn" onclick="submitForm()">送出表單</button>
+      </div>
+
+      <div class="card">
+        <h2>測試說明</h2>
+        <p>送出後會觸發 <code>contact_form_submit</code> 事件。</p>
+        <p class="small">可觀察參數：form_name、user_name、user_email、topic、message_length</p>
+      </div>
+    </section>
 
     <div class="footer">
-      送出後會觸發 <code>contact_form_submit</code> 事件。
+      <p>送出後請到 GA4 Realtime / DebugView 檢查事件。</p>
     </div>
-  </div>
+  </main>
 
   <script>
+    function trackEvent(eventName, params) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, params);
+        console.log('已送出事件：', eventName, params);
+      }
+    }
+
+    function trackNav(linkName) {
+      trackEvent('nav_click', { link_name: linkName });
+    }
+
     function submitForm() {
       const name = document.getElementById('name').value || 'anonymous';
+      const email = document.getElementById('email').value || '';
+      const topic = document.getElementById('topic').value || '';
       const message = document.getElementById('message').value || '';
 
-      gtag('event', 'contact_form_submit', {
+      trackEvent('contact_form_submit', {
         form_name: 'contact_form',
         user_name: name,
+        user_email: email,
+        topic: topic,
         message_length: message.length
       });
 
-      console.log('contact_form_submit', { name, message_length: message.length });
       alert('表單事件已送出');
     }
   </script>
 </body>
 </html>
+
 
