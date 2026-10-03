@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>聯絡｜GA4 測試站</title>
+  <title>聯絡｜GA4 展示版</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
   <script>
@@ -18,7 +18,7 @@
 <body>
   <header class="header">
     <div class="header-inner">
-      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 測試站</a>
+      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 展示版</a>
       <nav class="nav">
         <a href="index.html" onclick="trackNav('index')">首頁</a>
         <a href="about.html" onclick="trackNav('about')">關於</a>
@@ -29,9 +29,9 @@
 
   <main class="container">
     <section class="hero">
-      <span class="badge">Contact Page</span>
+      <span class="badge">Contact</span>
       <h1>聯絡我們</h1>
-      <p>這個頁面用來測試表單送出、自訂事件與欄位資料參數。</p>
+      <p>這個頁面用來測試表單送出事件，並觀察欄位填寫行為與轉換率。</p>
     </section>
 
     <section class="grid">
@@ -58,23 +58,24 @@
       </div>
 
       <div class="card">
-        <h2>測試說明</h2>
-        <p>送出後會觸發 <code>contact_form_submit</code> 事件。</p>
-        <p class="small">可觀察參數：form_name、user_name、user_email、topic、message_length</p>
+        <h2>觀察重點</h2>
+        <ul class="list-clean">
+          <li>表單送出次數</li>
+          <li>每次送出時的訊息長度</li>
+          <li>哪個欄位最常被填寫</li>
+        </ul>
       </div>
     </section>
 
     <div class="footer">
-      <p>送出後請到 GA4 Realtime / DebugView 檢查事件。</p>
+      <p>送出表單後，請在 GA4 查看事件是否進入 Realtime / DebugView。</p>
     </div>
   </main>
 
   <script>
     function trackEvent(eventName, params) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, params);
-        console.log('已送出事件：', eventName, params);
-      }
+      if (typeof gtag === 'function') gtag('event', eventName, params);
+      console.log(eventName, params);
     }
 
     function trackNav(linkName) {
@@ -98,6 +99,9 @@
       alert('表單事件已送出');
     }
   </script>
+</body>
+</html>
+
 </body>
 </html>
 
