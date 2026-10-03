@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>首頁｜GA4 測試站</title>
+  <title>首頁｜GA4 展示版</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
   <script>
@@ -18,7 +18,7 @@
 <body>
   <header class="header">
     <div class="header-inner">
-      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 測試站</a>
+      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 展示版</a>
       <nav class="nav">
         <a href="index.html" onclick="trackNav('index')">首頁</a>
         <a href="about.html" onclick="trackNav('about')">關於</a>
@@ -29,53 +29,67 @@
 
   <main class="container">
     <section class="hero">
+      <span class="badge">GA4 Demo</span>
       <span class="badge">GitHub Pages</span>
-      <span class="badge">GA4 Tracking</span>
-      <h1>GA4 多頁測試站</h1>
-      <p>這個網站用來測試頁面瀏覽、按鈕點擊、表單送出、捲動深度與外部連結事件，適合作業展示與實驗紀錄。</p>
+      <h1>GA4 數據分析展示網站</h1>
+      <p>這個網站用來學習網站數據分析，追蹤使用者瀏覽、按鈕點擊、表單送出、外部連結與捲動深度。</p>
+      <a class="btn dark" href="about.html" onclick="trackEvent('hero_cta_click', {cta_name: 'about_page'})">了解專案</a>
+      <a class="btn green" href="contact.html" onclick="trackEvent('hero_cta_click', {cta_name: 'contact_page'})">聯絡我們</a>
     </section>
 
+    <h2 class="section-title">網站特色</h2>
     <section class="grid">
       <div class="card">
-        <h2>按鈕事件</h2>
-        <p>點擊按鈕可送出自訂事件 <code>home_button_click</code>。</p>
-        <button class="btn" onclick="trackEvent('home_button_click', {button_name: 'home_blue'})">首頁藍色按鈕</button>
-        <button class="btn green" onclick="trackEvent('home_button_click', {button_name: 'home_green'})">首頁綠色按鈕</button>
+        <h2>1. 事件追蹤</h2>
+        <p>測試按鈕、導覽列、表單與外部連結事件。</p>
       </div>
 
       <div class="card">
-        <h2>外部連結測試</h2>
-        <p>點擊以下連結會送出 <code>outbound_click</code>。</p>
+        <h2>2. 數據分析</h2>
+        <p>觀察使用者在哪一頁停留最久，哪個按鈕最常被點。</p>
+      </div>
+
+      <div class="card">
+        <h2>3. 網站優化</h2>
+        <p>根據 GA4 結果調整內容、按鈕位置與頁面結構。</p>
+      </div>
+    </section>
+
+    <h2 class="section-title">互動測試</h2>
+    <section class="grid">
+      <div class="card">
+        <h2>首頁按鈕</h2>
+        <button class="btn" onclick="trackEvent('home_button_click', {button_name: 'home_blue'})">藍色按鈕</button>
+        <button class="btn green" onclick="trackEvent('home_button_click', {button_name: 'home_green'})">綠色按鈕</button>
+      </div>
+
+      <div class="card">
+        <h2>外部連結</h2>
         <a href="https://www.google.com" target="_blank" rel="noopener"
            onclick="trackOutbound('https://www.google.com', 'Google')">前往 Google</a><br />
-        <a href="https://www.youtube.com" target="_blank" rel="noopener"
-           onclick="trackOutbound('https://www.youtube.com', 'YouTube')">前往 YouTube</a>
+        <a href="https://analytics.google.com/" target="_blank" rel="noopener"
+           onclick="trackOutbound('https://analytics.google.com/', 'GA4 Console')">前往 GA4 Console</a>
       </div>
 
       <div class="card">
-        <h2>頁面導覽</h2>
-        <p>使用上方導覽列切換頁面，測試多頁 page_view 與 nav_click。</p>
-        <a class="btn dark" href="about.html" onclick="trackNav('about')">前往關於頁</a>
-        <a class="btn dark" href="contact.html" onclick="trackNav('contact')">前往聯絡頁</a>
-      </div>
-
-      <div class="card">
-        <h2>測試提示</h2>
-        <p class="small">請到 GA4 的 Realtime 或 DebugView 觀察事件。</p>
+        <h2>分析提示</h2>
+        <ul class="list-clean">
+          <li>觀察 Realtime / DebugView</li>
+          <li>比較不同按鈕點擊數</li>
+          <li>分析使用者捲動深度</li>
+        </ul>
       </div>
     </section>
 
     <div class="footer">
-      <p>© 2026 GA4 測試站</p>
+      <p>請向下捲動頁面測試 scroll_depth 事件。</p>
     </div>
   </main>
 
   <script>
     function trackEvent(eventName, params) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, params);
-        console.log('已送出事件：', eventName, params);
-      }
+      if (typeof gtag === 'function') gtag('event', eventName, params);
+      console.log(eventName, params);
     }
 
     function trackNav(linkName) {
@@ -86,10 +100,7 @@
       trackEvent('outbound_click', { link_url: url, link_text: text });
     }
 
-    let scroll25 = false;
-    let scroll50 = false;
-    let scroll75 = false;
-    let scroll90 = false;
+    let scroll25 = false, scroll50 = false, scroll75 = false, scroll90 = false;
 
     window.addEventListener('scroll', () => {
       const doc = document.documentElement;
@@ -107,5 +118,6 @@
   </script>
 </body>
 </html>
+
 
 
