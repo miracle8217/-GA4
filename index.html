@@ -55,7 +55,7 @@
   </div>
 
 <script>
-  function trackEvent(eventName, params) {
+  function trackEvent(eventName, params, buttonText) {
     if (typeof gtag === 'function') {
       gtag('event', eventName, params);
       console.log('已送出事件：', eventName, params);
@@ -66,6 +66,8 @@
     }
   }
 </script>
+
+
 
 </body>
 </html>
