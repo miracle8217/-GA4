@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>關於｜GA4 測試站</title>
+  <title>關於｜GA4 展示版</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKWRS35Y7"></script>
   <script>
@@ -18,7 +18,7 @@
 <body>
   <header class="header">
     <div class="header-inner">
-      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 測試站</a>
+      <a class="brand" href="index.html" onclick="trackNav('index')">GA4 展示版</a>
       <nav class="nav">
         <a href="index.html" onclick="trackNav('index')">首頁</a>
         <a href="about.html" onclick="trackNav('about')">關於</a>
@@ -29,47 +29,44 @@
 
   <main class="container">
     <section class="hero">
-      <span class="badge">About Page</span>
-      <h1>關於這個測試站</h1>
-      <p>這個頁面主要用來測試多頁網站的瀏覽追蹤、按鈕事件與導覽事件，同時也能展示網站目的與架構。</p>
+      <span class="badge">About</span>
+      <h1>關於這個專案</h1>
+      <p>這是一個用於學習 GA4 的多頁網站，目的是透過真實互動資料觀察使用者行為，並練習如何做數據分析與網站優化。</p>
     </section>
 
     <section class="grid">
       <div class="card">
-        <h2>網站目的</h2>
-        <ul>
-          <li>測試 GA4 的 page_view</li>
-          <li>測試自訂事件與參數</li>
-          <li>測試不同頁面切換</li>
-          <li>測試 DebugView 與 Realtime</li>
+        <h2>學習目標</h2>
+        <ul class="list-clean">
+          <li>了解 page_view 與事件追蹤</li>
+          <li>學習如何設計 GA4 事件</li>
+          <li>練習觀察 Realtime / DebugView</li>
+          <li>學會根據數據改善網站</li>
         </ul>
       </div>
 
       <div class="card">
-        <h2>功能測試</h2>
-        <p>點下面按鈕可送出 <code>about_click</code> 事件：</p>
+        <h2>互動測試</h2>
+        <p>按這個按鈕會送出 <code>about_click</code>：</p>
         <button class="btn amber" onclick="trackEvent('about_click', {section: 'about_page'})">送出 about_click</button>
       </div>
 
       <div class="card">
-        <h2>外部資源</h2>
-        <p>你也可以測試外部連結點擊。</p>
+        <h2>延伸連結</h2>
         <a href="https://analytics.google.com/" target="_blank" rel="noopener"
-           onclick="trackOutbound('https://analytics.google.com/', 'GA4 Console')">前往 Google Analytics</a>
+           onclick="trackOutbound('https://analytics.google.com/', 'Google Analytics')">前往 Google Analytics</a>
       </div>
     </section>
 
     <div class="footer">
-      <p>請確認 Realtime / DebugView 是否出現此頁瀏覽與事件。</p>
+      <p>這一頁的重點是觀察關於頁是否能產生瀏覽與互動數據。</p>
     </div>
   </main>
 
   <script>
     function trackEvent(eventName, params) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, params);
-        console.log('已送出事件：', eventName, params);
-      }
+      if (typeof gtag === 'function') gtag('event', eventName, params);
+      console.log(eventName, params);
     }
 
     function trackNav(linkName) {
@@ -81,6 +78,8 @@
     }
   </script>
 </body>
+</html>
+
 </html>
 
 
